@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Translation {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background: url('/static/bg_project.jpg') no-repeat center center fixed;  */
+            background-size: cover;
+            height: 100vh;
+            color: #333333;
+        }
+        .navbar-nav{
+        margin-left: 1225px;
+        }
+        .navbar-brand,
+        .nav-link {
+            color: #333333 !important;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+        
+        .logo {
+            width: 50px;
+            border-radius: 50px;
+            margin: 5px 20px;
+            align-items: center;
+            margin-bottom: 0px;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .justified-text {
+            text-align: justify;
+        }
+        #videoContainer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        #videoAndButtons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #video {
+            width: 100%;
+            max-width: 640px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .output {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        footer {
+            background: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-top: #ff6600 3px solid;
+            position: sticky;
+            width: 100%;
+            bottom: 0;
+        }
+
+        #instructions {
+            max-width: 400px;
+            margin: 100px;
+            margin-right: 0px;
+            padding: 15px;
+            border: 2px solid lightgray;
+            border-radius: 10px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        #instructions h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        #instructions ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        #instructions li {
+            margin-bottom: 10px;
+        }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+            }
+        }
+    </style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img class="logo" src="{% static 'logo.png' %}" alt="UniTalk" />
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'course' %}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'predict_hand_sign' %}">Translate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_student' %}">{{ user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="videoContainer">
+        <div id="videoAndButtons">
+            <video id="video" autoplay></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <button id="startButton">Start</button>
+            <button id="stopButton" disabled>Stop</button>
+            <div id="prediction" class="output">Predicted Letter: </div>
+            <div id="sequence" class="output">Predicted Sequence: </div>
+            <!-- <div id="words" class="output">Predicted Words: </div> -->
+        </div>
+        <div id="instructions">
+            <h3>Instructions</h3>
+            <ul>
+                <li>Ensure your hand is clearly visible in the video frame.</li>
+                <li>Remove any objects or backgrounds that may cause interference.</li>
+                <li>Maintain a consistent distance from the camera.</li>
+                <li>Perform gestures clearly and steadily for accurate recognition.</li>
+                <li>Click "Start" to begin capturing and "Stop" to end the session.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const predictionDiv = document.getElementById('prediction');
+        const sequenceDiv = document.getElementById('sequence');
+        const wordsDiv = document.getElementById('words');
+    
+        let isCapturing = false;
+        const apiUrl = '/predict_hand_sign/';
+        const frameSequence = [];
+        const SEQ_LENGTH = 30;
+        let currentPrediction = '';
+    
+        async function startCapture() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                isCapturing = true;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                captureFrames();
+            } catch (err) {
+                console.error('Error starting video capture:', err);
+            }
+        }
+    
+        function stopCapture() {
+            const stream = video.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+            video.srcObject = null;
+            isCapturing = false;
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            frameSequence.length = 0; // Clear the frame sequence
+        }
+    
+        async function captureFrames() {
+            if (!isCapturing) return;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const frameData = canvas.toDataURL('image/jpeg');
+            frameSequence.push(frameData);
+    
+            if (frameSequence.length === SEQ_LENGTH) {
+                await sendFrames(frameSequence);
+                frameSequence.length = 0; // Clear the sequence after sending
+            }
+    
+            requestAnimationFrame(captureFrames);
+        }
+    
+        async function sendFrames(frames) {
+            for (let frame of frames) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': getCSRFToken()
+                        },
+                        body: 'frame=' + encodeURIComponent(frame)
+                    });
+                    const data = await response.json();
+                    updateOutput(data);
+                } catch (err) {
+                    console.error('Error sending frame data to server:', err);
+                }
+            }
+        }
+    
+        function updateOutput(data) {
+            console.log(data); // Log the data object received
+            // Check if the predicted letter has changed
+            if (data.predicted_letter !== currentPrediction) {
+                // Update the current prediction only if it's different from the previous one
+                currentPrediction = data.predicted_letter;
+                // Update the prediction div
+                predictionDiv.textContent = 'Predicted Letter: ' + currentPrediction;
+            }
+            sequenceDiv.textContent = 'Predicted Sequence: ' + data.predicted_sequence.join('');
+            wordsDiv.textContent = 'Predicted Words: ' + data.predicted_words.join(' ');
+            localStorage.setItem('predictedSequence', JSON.stringify(data.predicted_sequence));
+            localStorage.setItem('predictedWords', JSON.stringify(data.predicted_words));
+        }
+
+    
+        window.addEventListener('load', () => {
+            const predictedSequence = JSON.parse(localStorage.getItem('predictedSequence')) || [];
+            const predictedWords = JSON.parse(localStorage.getItem('predictedWords')) || '';
+            predictionDiv.textContent = 'Predicted Letter: ' + currentPrediction;
+            sequenceDiv.textContent = 'Predicted Sequence: ' + predictedSequence.join('');
+            wordsDiv.textContent = 'Predicted Words: ' + predictedWords;
+        });
+
+        function getCSRFToken() {
+            const cookieValue = document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)');
+            return cookieValue ? cookieValue.pop() : '';
+        }
+    
+        startButton.addEventListener('click', startCapture);
+        stopButton.addEventListener('click', stopCapture);
+    </script>
+
+<footer class="footer">
+    <div class="container">
+      <p>&copy; INDIAN SIGN LANGUAGE LEARNING AND TRANSLATION SYSTEM USING LSTM ALGORITHM</p>
+    </div>
+</footer>
+</body>
+{% endblock %}

@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% block pagetitle %} ISL {% endblock pagetitle %}
+{% block content %}
+{% load static %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+    }
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
+    header {
+        background: #343a40;
+        color: #ffffff;
+        padding: 10px 0;
+        border-bottom: #ff6600 3px solid;
+    }
+    .navbar-nav{
+        margin-left: 1225px;
+    }
+    .navbar-brand,
+    .nav-link {
+        color: #333333 !important;
+    }
+
+    .nav-link:hover {
+        color: #007bff !important;
+    }
+    
+    .logo {
+        width: 50px;
+        border-radius: 50px;
+        margin: 5px 20px;
+        align-items: center;
+        margin-bottom: 0px;
+    }
+    header h1 {
+        text-align: center;
+        margin: 0;
+        font-size: 24px;
+    }
+    main {
+        padding: 20px;
+        background: #ffffff;
+        margin-top: 20px;
+        border-radius: 8px;
+    }
+    section {
+        margin-bottom: 20px;
+    }
+    section h2 {
+        background: #007bff;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    section h3 {
+        color: #007bff;
+        margin-top: 10px;
+    }
+    .video-container {
+        margin: 20px 0;
+    }
+    footer {
+        background: #343a40;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        border-top: #ff6600 3px solid;
+        position:sticky;
+        width: 100%;
+        bottom: 0;
+    }
+    button {
+        background: #007bff;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button:hover {
+        background: #0056b3;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img class="logo" src="{% static 'logo.png' %}" alt="UniTalk" />
+        </a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'course' %}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'predict_hand_sign' %}">Translate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_student' %}">{{ user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <header>
+            <h1>Indian Sign Language Course</h1>
+        </header>
+        <main>
+            <section id="introduction">
+                <h2>Indian Sign Language - Introduction</h2>
+                <h3>Overview of the course</h3>
+                <p>This is an introductory course in Indian Sign Language. It will cover topics beginning with the introduction, history , importance,  alphabet, numbers, and basic words. This will help you get started in understanding Indian Sign Language and communicate with the deaf community.</p>
+                <h3>Introduction to Indian Sign Language</h3>
+                <p>Sign language interpreting involves practice of two languages of different modalities, i.e.,
+                    one is in signed modality and another is in spoken modality.
+                    It is a pre-requisite that trainee interpreter has mastery over at least one spoken language of
+                    choice. However, interpreting practical involves adequate hours of practice of
+                    interpreting in both language modalities i.e. from sign to spoken modality and vice versa. </p>
+                <p>
+                    Sign languages developed wherever there were deaf people, just as spoken languages developed wherever there were hearing people. Research has shown that, like spoken
+                    languages, sign languages are also true, complete, alive and active languages. Like
+                    spoken languages, sign languages are also not universal. The sign language used by
+                    millions of deaf people in India is known as Indian Sign Language (ISL).
+                </p>                  
+            </section>
+            <section id="history">
+                <h2>Indian Sign Language - History</h2>
+                <h3>History of ISL</h3>
+                <p>Indian Sign Language (ISL) has a rich and complex history that mirrors the cultural and linguistic diversity of the Indian subcontinent. The roots of ISL extend back to ancient times, though detailed documentation from these early periods is sparse. Historically, deaf individuals in India, much like their counterparts worldwide, developed their own manual communication systems within their families and local communities. These early forms of sign language were informal and varied significantly across different regions.</p>
+                <p>
+                    The advent of the British colonial period brought about a more formal approach to education for the deaf in India. The first school for the deaf was established in Bombay (now Mumbai) in 1885 by Jane Leupold, a missionary. These early educational initiatives often relied on British Sign Language (BSL) or American Sign Language (ASL) as models, which influenced the nascent development of ISL. After India gained independence in 1947, there was a slow but steady increase in awareness and advocacy for the rights of people with disabilities, including the deaf community. However, the primary focus remained on oralism and speech training, with sign language receiving limited institutional support.
+                </p>
+                <p>
+                    In the late 20th century, there was a growing recognition of the importance of sign language for the deaf community. A significant milestone was the establishment of the Indian Sign Language Research and Training Centre (ISLRTC) in 2011. ISLRTC has been pivotal in standardizing ISL, promoting its use, and providing training and resources. This period marked the beginning of a more concerted effort to elevate the status of ISL and integrate it into various aspects of life for the deaf community in India.
+                </p>              
+            </section>
+            <section id="importance">
+                <h2>Indian Sign Language - Importance</h2>
+                <h3>
+                    Importance of Indian Sign Language:
+                </h3>
+                <p>
+                    The importance of ISL extends beyond mere communication; it is crucial for inclusion and the overall well-being of deaf individuals. ISL provides a natural and accessible means for deaf people to express themselves, share information, and engage socially, fostering a strong sense of community and belonging. In educational settings, the use of ISL is vital for the academic development of deaf students, allowing them to access the curriculum fully and participate actively in classroom activities. Bilingual education, which incorporates both ISL and written/spoken languages, is increasingly recognized as the best practice for educating deaf students.
+                </p>
+                <p>
+                    ISL is also a key component of the cultural identity of the deaf community in India. It possesses its own unique grammar, syntax, and idiomatic expressions, reflecting the unique experiences and perspectives of its users. Promoting ISL helps preserve and celebrate this cultural heritage, ensuring that the rich traditions and stories of the deaf community are passed down through generations.
+                </p>
+                <p>
+                    Furthermore, recognizing and promoting ISL aligns with the rights of persons with disabilities as outlined in international frameworks such as the United Nations Convention on the Rights of Persons with Disabilities (UNCRPD). Empowering deaf individuals through the use of sign language enhances their ability to participate fully in society and exercise their rights. ISL also plays a significant role in social integration, bridging communication gaps between deaf and hearing individuals, fostering greater understanding, and reducing social isolation.
+                </p>
+                <p>
+                    Advances in technology, such as video calling and social media platforms, have expanded the possibilities for using ISL, facilitating broader communication opportunities and access to information for the deaf community. In sum, Indian Sign Language is not merely a communication tool but a vital element of cultural identity, educational access, and social inclusion for deaf individuals in India. Its historical development reflects broader societal changes, and its growing recognition underscores the importance of linguistic diversity and rights for all. Promoting and supporting ISL is essential for building a more inclusive and equitable society.
+                </p>
+            </section>
+            
+            <section id="video-lessons">
+                <h2>Indian Sign Language - Video Lessons</h2>
+                <button onclick="showVideo('A')">Letter A</button>
+                <button onclick="showVideo('B')">Letter B</button>
+                <button onclick="showVideo('C')">Letter C</button>
+                <button onclick="showVideo('D')">Letter D</button>
+                <button onclick="showVideo('E')">Letter E</button>
+                <button onclick="showVideo('F')">Letter F</button>
+                <button onclick="showVideo('G')">Letter G</button>
+                <button onclick="showVideo('H')">Letter H</button>
+                <button onclick="showVideo('I')">Letter I</button>
+                <button onclick="showVideo('J')">Letter J</button>
+                <button onclick="showVideo('K')">Letter K</button>
+                <button onclick="showVideo('L')">Letter L</button>
+                <button onclick="showVideo('M')">Letter M</button>
+                <button onclick="showVideo('N')">Letter N</button>
+                <button onclick="showVideo('O')">Letter O</button>
+                <button onclick="showVideo('P')">Letter P</button>
+                <button onclick="showVideo('Q')">Letter Q</button>
+                <button onclick="showVideo('R')">Letter R</button>
+                <button onclick="showVideo('S')">Letter S</button>
+                <button onclick="showVideo('T')">Letter T</button>
+                <button onclick="showVideo('U')">Letter U</button>
+                <button onclick="showVideo('V')">Letter V</button>
+                <button onclick="showVideo('W')">Letter W</button>
+                <button onclick="showVideo('X')">Letter X</button>
+                <button onclick="showVideo('Y')">Letter Y</button>
+                <button onclick="showVideo('Z')">Letter Z</button>
+                <div id="videoContainerA" class="video-container">
+                    <h4>Letter A:</h4>
+                    <iframe id="videoA" width="560" height="315" src="https://www.youtube.com/embed/u_ZTEXA_WX4?si=XIw1dQr9XJoeMhd0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerB" class="video-container" style="display:none;">
+                    <h4>Letter B:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/ieWVWx9ykb8?si=HrhMKL5u63eq5k8j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerC" class="video-container" style="display:none;">
+                    <h4>Letter C:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/zmZ8E1O34pQ?si=XmdaB-EjHxPRI3ff" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerD" class="video-container" style="display:none;">
+                    <h4>Letter D:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/cMzyA5kiFI4?si=wSf7wQCSBfUZjTrn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerE" class="video-container" style="display:none;">
+                    <h4>Letter E:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/GM5U69TAQ0c?si=sfkngm2bVg5neibc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerF" class="video-container" style="display:none;">
+                    <h4>Letter F:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/1wKAw-aCP44?si=LHZWWd7tOA7Osp5y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerG" class="video-container" style="display:none;">
+                    <h4>Letter G:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Ez8rwyZvclA?si=62BHOdJZz_O1WTJB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerH" class="video-container" style="display:none;">
+                    <h4>Letter H:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/T2DVNMM5hmc?si=9T1qBDQlEKhVR7E9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerI" class="video-container" style="display:none;">
+                    <h4>Letter I:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/cGZRNgzl7Ks?si=E8pcu67SGyyDCImP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerJ" class="video-container" style="display:none;">
+                    <h4>Letter J:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/CKoTMog47Eo?si=NCr7BiyXI-3Fw6ls" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerK" class="video-container" style="display:none;">
+                    <h4>Letter K:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/0QphTAjEJaI?si=PtuUbTvLqjLnaZ18" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerL" class="video-container" style="display:none;">
+                    <h4>Letter L:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/uh4T_jmc4Sw?si=R8nXywxZZRSR1ros" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerM" class="video-container" style="display:none;">
+                    <h4>Letter M:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/c3vj8iQpabg?si=Sb62IxFGdJW_KZg2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerN" class="video-container" style="display:none;">
+                    <h4>Letter N:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/thLt0HRBzKI?si=V_cGSQIESx3KqvIh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerO" class="video-container" style="display:none;">
+                    <h4>Letter O:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/YuHPc6obYlQ?si=PxCyd2vb5q8jnZdO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerP" class="video-container" style="display:none;">
+                    <h4>Letter P:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/XOIHxWPt_UE?si=sLKY-l1XpbBcxAzU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerQ" class="video-container" style="display:none;">
+                    <h4>Letter Q:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/7wMVH7iJUNI?si=_I1CKd0Isvl0s_mW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerR" class="video-container" style="display:none;">
+                    <h4>Letter R:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/0Lk7_fKVCdk?si=1_qf2srMq8DSjTd6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerS" class="video-container" style="display:none;">
+                    <h4>Letter S</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerS" class="video-container" style="display:none;">
+                    <h4>Letter T</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerS" class="video-container" style="display:none;">
+                    <h4>Letter U</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerV" class="video-container" style="display:none;">
+                    <h4>Letter V:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/XaHVxkbbO40?si=jqniKxcseYTSvGPE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerS" class="video-container" style="display:none;">
+                    <h4>Letter W</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerX" class="video-container" style="display:none;">
+                    <h4>Letter X</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerY" class="video-container" style="display:none;">
+                    <h4>Letter Y:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div id="videoContainerZ" class="video-container" style="display:none;">
+                    <h4>Letter Z:</h4>
+                    <iframe id="videoB" width="560" height="315" src="https://www.youtube.com/embed/Vj_13bdU4dU?si=aLmQ0p30RmBX1pFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <!-- Add containers for other letters' videos -->
+            </section>
+        </main>
+        
+    </div>
+    <script>
+        function showVideo(letter) {
+        // Hide all videos first
+        document.querySelectorAll('.video-container').forEach(function(videoContainer) {
+            videoContainer.style.display = 'none';
+        });
+        // Show the corresponding video
+        document.getElementById('videoContainer' + letter).style.display = 'block';
+    }
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Document is ready');
+        });
+    </script>
+    <footer>
+        <p>© INDIAN SIGN LANGUAGE LEARNING AND TRANSLATION SYSTEM USING LSTM ALGORITHM</p>
+    </footer>
+</body>
+{% endblock %}

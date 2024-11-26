@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Home {% endblock pagetitle %}
+{% block content %}
+{% include 'navbar.html' %}
+
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/album/">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      /* background: url('/static/bg_project.jpg') no-repeat center center fixed;  */
+      background-size: cover;
+      height: 100vh;
+      color: #333333;
+    }
+
+    .header {
+      background-color: #007bff;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .justified-text {
+      text-align: justify;
+    }
+
+    .image-container {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .feature-item h3 {
+      color: #007bff;
+    }
+
+    footer {
+      background: #343a40;
+      color: #ffffff;
+      text-align: center;
+      padding: 10px;
+      border-top: #ff6600 3px solid;
+      position: sticky;
+      width: 100%;
+      bottom: 0;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    
+  </style>
+<!-- </head> -->
+
+<body>
+  
+
+  <main>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="font-weight-light">Language Learning & Translation System</h1>
+          <p class="lead text-muted justified-text">Our Language Learning and Translation System aims to revolutionize the way people acquire new languages and bridge linguistic gaps. By leveraging cutting-edge technologies, artificial intelligence, and state-of-the-art language processing algorithms, this project intends to create a comprehensive and user-friendly platform that empowers individuals to not only learn new languages efficiently but also seamlessly translate between languages.</p>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      
+    </div>
+  </main>
+
+  <section class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 feature-item">
+          <h3>Detection</h3>
+          <h5>
+            <p class="lead text-muted justified-text">Utilizing OpenCV and TensorFlow for real-time sign language detection.</p>
+          </h5>
+        </div>
+        <div class="col-md-4 feature-item">
+          <h3>Translation</h3>
+          <h5>
+            <p class="lead text-muted justified-text">Translation of Indian Sign Language to text and speech.</p>
+          </h5>
+        </div>
+        <div class="col-md-4 feature-item">
+          <h3>Learning</h3>
+          <h5>
+            <p class="lead text-muted justified-text">Interactive tutorials and exercises for learning Indian Sign Language.</p>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>About the Project</h2>
+          <h5>
+            <p class="lead text-muted justified-text">This project aims to bridge the communication gap for the hearing impaired community by leveraging modern technologies such as Python, Django, TensorFlow, Keras, and OpenCV. Our system can detect Indian Sign Language gestures, translate them into text and speech, and provide a platform for users to learn and practice these gestures.</p>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="research-paper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 paper-item">
+          <h2>Published Research Paper</h2>
+          <h5>
+            <p class="lead text-muted justified-text">We have published a comprehensive research paper detailing the methodologies, technologies, and results of our project. You can read or download the full paper below: </p>
+            <a href="https://drive.google.com/file/d/1MumDx5cbM6IqBBpeuBIAn46e6Vclgzle/view"> Research paper </a>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; INDIAN SIGN LANGUAGE LEARNING AND TRANSLATION SYSTEM USING LSTM ALGORITHM</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+{% endblock %}

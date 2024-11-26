@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <title>Sign Language Recognition</title>
+    <style>
+        #videoContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #video {
+            width: 100%;
+            max-width: 640px;
+            margin-bottom: 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">UniTalk</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'course' %}">Courses</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'predict_hand_sign' %}">Translate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Signup</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div id="videoContainer">
+        <video id="video" autoplay></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <button id="startButton">Start</button>
+        <button id="stopButton" disabled>Stop</button>
+        <div id="prediction" class="output"></div>
+    </div>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const predictionDiv = document.getElementById('prediction');
+
+        let isCapturing = false;
+        const apiUrl = '/model_evaluation/';
+        const frameSequence = [];
+        const SEQ_LENGTH = 30;
+
+        async function startCapture() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                isCapturing = true;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                captureFrames();
+            } catch (err) {
+                console.error('Error starting video capture:', err);
+            }
+        }
+
+        function stopCapture() {
+            const stream = video.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+            video.srcObject = null;
+            isCapturing = false;
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            frameSequence.length = 0; // Clear the frame sequence
+        }
+
+        async function captureFrames() {
+            if (!isCapturing) return;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const frameData = canvas.toDataURL('image/jpeg');
+            frameSequence.push(frameData);
+
+            if (frameSequence.length === SEQ_LENGTH) {
+                await sendFrames(frameSequence);
+                frameSequence.length = 0; // Clear the sequence after sending
+            }
+
+            requestAnimationFrame(captureFrames);
+        }
+
+        async function sendFrames(frames) {
+            for (let frame of frames) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': getCSRFToken()
+                        },
+                        body: 'frame=' + encodeURIComponent(frame)
+                    });
+                    const data = await response.json();
+                    updateOutput(data);
+                } catch (err) {
+                    console.error('Error sending frame data to server:', err);
+                }
+            }
+        }
+
+        let previousPredictedLetter = '';
+        let previousPredictedSequence = '';
+
+        function updateOutput(data) {
+            let outputText = '';
+            if (data.predicted_letter && data.predicted_letter !== previousPredictedLetter) {
+                outputText += 'Predicted Letter: ' + data.predicted_letter;
+                previousPredictedLetter = data.predicted_letter;
+            }
+            if (data.predicted_sequence && data.predicted_sequence.join('') !== previousPredictedSequence) {
+                outputText += ' Sequence: ' + data.predicted_sequence.join('');
+                previousPredictedSequence = data.predicted_sequence.join('');
+            }
+            predictionDiv.textContent = outputText;
+        }
+
+
+
+
+
+        function getCSRFToken() {
+            const cookieValue = document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)');
+            return cookieValue ? cookieValue.pop() : '';
+        }
+
+        startButton.addEventListener('click', startCapture);
+        stopButton.addEventListener('click', stopCapture);
+    </script>
+</body>
+</html>

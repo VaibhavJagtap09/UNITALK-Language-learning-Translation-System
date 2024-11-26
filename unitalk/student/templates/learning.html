@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Learning {% endblock pagetitle %}
+{% block content %}
+{% include 'navbar.html' %}
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333333;
+    }
+    
+    header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      padding: 10px 0;
+    }
+
+    .content-section {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul ul {
+      margin-left: 20px;
+    }
+
+    li.course-item {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #e9ecef;
+      margin: 5px 0;
+    }
+
+    li.course-item:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .content {
+      display: none;
+    }
+
+    .sidebar {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .sidebar img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    footer {
+            background: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-top: #ff6600 3px solid;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+    }
+  </style>
+
+<body>
+  <main class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <section class="content-section" id="overview">
+          <h2>Overview</h2>
+          <p>This is an introductory course in Indian Sign Language. It will cover topics beginning with the alphabet, numbers and basic words and progressing to colors, relations, days of the week, months, and standard signs. It consists of 11 lessons taught by Pragya and will help you get started in understanding Indian Sign Language and communicate with the deaf community.</p>
+        </section>
+
+        <section class="content-section" id="syllabus">
+          <h2>Syllabus</h2>
+          <ul>
+            <li class="course-item" onclick="toggleVisibility('module0')">Indian Sign Language - Introduction</li>
+            <ul id="module0" class="content">
+              <li>Overview of the course</li>
+              <li>Introduction to Indian Sign Language</li>
+            </ul>
+            <li class="course-item" onclick="toggleVisibility('module1')">Indian Sign Language - History and Importance</li>
+            <ul id="module1" class="content">
+              <li>History of ISL</li>
+              <li>Importance of ISL</li>
+            </ul>
+            <li class="course-item" onclick="toggleVisibility('module6')">Indian Sign Language - Video Lessons</li>
+            <ul id="module6" class="content">
+              <li>Alphabet and Common Phrases Video Lessons</li>
+            </ul>
+            <!-- <li class="course-item" onclick="toggleVisibility('module7')">Indian Sign Language - Quizzes and Assessments</li>
+            <ul id="module7" class="content">
+              <li>Alphabet and Numbers Quiz</li>
+              <li>Final Assessment</li>
+            </ul> -->
+          </ul>
+        </section>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="sidebar">
+          <div class="sidebar-content">
+            <a href="{% url 'isl' %}">
+                <button class="btn btn-primary">Start Learning</button>
+            </a>
+            <p><strong>Platform:</strong> UniTalk</p>
+            <p><strong>Course Type:</strong> Free Online Course</p>
+            <p><strong>Language:</strong> English</p>
+            <p><strong>Duration:</strong> 1 hour 30 minutes</p>
+            <p><strong>Availability:</strong> On-Demand</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; INDIAN SIGN LANGUAGE LEARNING AND TRANSLATION SYSTEM USING LSTM ALGORITHM</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleVisibility(moduleId) {
+      const module = document.getElementById(moduleId);
+      if (module.style.display === 'none' || module.style.display === '') {
+        module.style.display = 'block';
+      } else {
+        module.style.display = 'none';
+      }
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+{% endblock %}

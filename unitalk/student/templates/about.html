@@ -1,0 +1,438 @@
+{% extends 'base.html' %}
+{% block pagetitle %} About us {% endblock pagetitle %}
+{% block content %}
+
+{% load static %}
+
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/static/slick.css">
+        <link rel="stylesheet" href="/static/bootstrap-icons.css">
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/tooplate-little-fashion.css">
+
+        <style>
+            .navbar-nav{
+                margin-left: 1050px;
+            }
+            .navbar-brand,
+            .nav-link {
+                color: #333333 !important;
+                margin: 2px;
+            }
+        
+            .nav-link:hover {
+                color: #007bff !important;
+            }
+            
+            .logo {
+                width: 50px;
+                border-radius: 50px;
+                margin: 5px 20px;
+                align-items: center;
+                margin-bottom: 0px;
+            }
+            footer {
+                background: #343a40;
+                color: #ffffff;
+                text-align: center;
+                padding: 10px;
+                border-top: #ff6600 3px solid;
+                position: sticky;
+                height: 60px;
+                width: 100%;
+                bottom: 0;
+            }
+        </style>        
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img class="logo" src="{% static 'logo.png' %}" alt="UniTalk" />
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'course' %}">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'predict_hand_sign' %}">Translate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_student' %}">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="sk-inner-circle"></span>
+            </div>
+        </section>
+    
+        <main>
+            <header class="site-header section-padding-img site-header-image">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12 header-info">
+                            <h1>
+                                <span class="d-block text-primary">UniTalk</span>
+                                <span class="d-block text-dark">Language Learning & Translation System</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="/static/BG1.jpg" class="header-image img-fluid" alt="">
+            </header>
+
+            <section class="team section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="mb-5">Meet our <span>team</span></h2>
+                        </div>
+
+                        <div class="col-lg-4 mb-4 col-12">
+                            <div class="team-thumb d-flex align-items-center">
+                                <!-- <img src="/static/logo.png" class="img-fluid custom-circle-image team-image me-4" alt=""> -->
+
+                                <div class="team-info">
+                                    <h5 class="mb-0">Dr. S. P. Kosbatwar</h5>
+                                    <strong class="text-muted">Guide</strong>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn custom-modal-btn" data-bs-toggle="modal" data-bs-target="#Kosbatwar">
+                                      <i class="bi-plus-circle-fill"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4 col-12">
+                            <div class="team-thumb d-flex align-items-center">
+                                <!-- <img src="/static/logo.png" class="img-fluid custom-circle-image team-image me-4" alt=""> -->
+
+                                <div class="team-info">
+                                    <h5 class="mb-0">Mr. Siddharth S. Gharge</h5>
+                                    <strong class="text-muted">Group Member</strong>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn custom-modal-btn" data-bs-toggle="modal" data-bs-target="#Siddharth">
+                                      <i class="bi-plus-circle-fill"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4 col-12">
+                            <div class="team-thumb d-flex align-items-center">
+                                <!-- <img src="/static/logo.png" class="img-fluid custom-circle-image team-image me-4" alt=""> -->
+
+                                <div class="team-info">
+                                    <h5 class="mb-0">Mr. Vaibhav S. Jagtap</h5>
+                                    <strong class="text-muted">Group Member</strong>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn custom-modal-btn" data-bs-toggle="modal" data-bs-target="#Vaibhav">
+                                      <i class="bi-plus-circle-fill"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-4 col-12">
+                            <div class="team-thumb d-flex align-items-center">
+                                <!-- <img src="/static/logo.png" class="img-fluid custom-circle-image team-image me-4" alt=""> -->
+
+                                <div class="team-info">
+                                    <h5 class="mb-0">Mr. Varun P. Dhumal</h5>
+                                    <strong class="text-muted">Group Member</strong>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn custom-modal-btn" data-bs-toggle="modal" data-bs-target="#Varun">
+                                      <i class="bi-plus-circle-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-lg-0 mb-4 col-12">
+                            <div class="team-thumb d-flex align-items-center">
+                                <!-- <img src="/static/logo.png" class="img-fluid custom-circle-image team-image me-4" alt=""> -->
+
+                                <div class="team-info">
+                                    <h5 class="mb-0">Mr. Vedant T. Dhanwade</h5>
+                                    <strong class="text-muted">Group Member</strong>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn custom-modal-btn" data-bs-toggle="modal" data-bs-target="#Vedant">
+                                      <i class="bi-plus-circle-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- <section class="testimonial section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-9 mx-auto col-11">
+                            <h2 class="text-center">Customer love, <br> <span>Little</span> Fashion</h2>
+
+                            <div class="slick-testimonial">
+                                <div class="slick-testimonial-caption">
+                                    <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
+
+                                    <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                                        <img src="/static/logo.png" class="img-fluid custom-circle-image me-3" alt="">
+
+                                        <span>George, <strong class="text-muted">Digital Art Fashion</strong></span>
+                                    </div>
+                                </div>
+
+                                <div class="slick-testimonial-caption">
+                                    <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
+
+                                    <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                                        <img src="/static/logo.png" class="img-fluid custom-circle-image me-3" alt="">
+
+                                        <span>Sandar, <strong class="text-muted">Zoom Fashion Idea</strong></span>
+                                    </div>
+                                </div>
+
+                                <div class="slick-testimonial-caption">
+                                    <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
+
+                                    <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                                        <img src="/static/logo.png" class="img-fluid custom-circle-image me-3" alt="">
+
+                                        <span>Marie, <strong class="text-muted">Art Fashion Design</strong></span>
+                                    </div>
+                                </div>
+
+                                <div class="slick-testimonial-caption">
+                                    <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
+
+                                    <div class="slick-testimonial-client d-flex align-items-center mt-4">
+                                        <img src="/static/logo.png" class="img-fluid custom-circle-image me-3" alt="">
+
+                                        <span>Catherine, <strong class="text-muted">Dress Fashion</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section> -->
+
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+              <p>&copy; INDIAN SIGN LANGUAGE LEARNING AND TRANSLATION SYSTEM USING LSTM ALGORITHM</p>
+            </div>
+          </footer>
+
+        <!-- TEAM MEMBER MODAL -->
+        <div class="modal fade" id="Kosbatwar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0">
+                    <div class="modal-header flex-column">
+                        <h3 class="modal-title" id="exampleModalLabel">Dr. S. P. Kosbatwar</h3>
+
+                        <h6 class="text-muted">Guide</h6>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h5 class="mb-4">D.I.E.T. Satara</h5>
+
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <p>Experienced mentor providing valuable insights, guidance, and support to ensure the success of our project</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TEAM MEMBER MODAL -->
+        <div class="modal fade" id="Siddharth" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0">
+                    <div class="modal-header flex-column">
+                        <h3 class="modal-title" id="exampleModalLabel">Mr. Siddharth S. Gharge</h3>
+
+                        <h6 class="text-muted">Front-end Developer</h6>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h5 class="mb-4">D.I.E.T. Satara</h5>
+
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-12">
+                                <p>Skillfully crafted the user interface, ensuring a seamless and engaging user experience for our project</p>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <p>Skills:</p>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>BootStrap</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TEAM MEMBER MODAL -->
+        <div class="modal fade" id="Vaibhav" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0">
+                    <div class="modal-header flex-column">
+                        <h3 class="modal-title" id="exampleModalLabel">Mr.Vaibhav S. Jagtap</h3>
+
+                        <h6 class="text-muted">Full Stack Developer</h6>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h5 class="mb-4">D.I.E.T. Satara</h5>
+
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-12">
+                                <p>Seamlessly integrated the frontend and backend, ensuring robust functionality and smooth performance across the entire project.</p>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <p>Skills:</p>
+                                <li>Python</li>
+                                <li>Django</li>
+                                <li>Tensorflow</li>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- TEAM MEMBER MODAL -->
+        <div class="modal fade" id="Varun" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0">
+                    <div class="modal-header flex-column">
+                        <h3 class="modal-title" id="exampleModalLabel">Mr.Varun P. Dhumal</h3>
+
+                        <h6 class="text-muted">Backend Developer</h6>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h5 class="mb-4">D.I.E.T. Satara</h5>
+
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-12">
+                                <p>Expertly designed and implemented the server-side logic, database management, and ensuring efficient data handling and system reliability.</p>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <p>Skills:</p>
+                                <li>Python</li>
+                                <li>Database Management</li>
+                                <li>PostgreSQL</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- TEAM MEMBER MODAL -->
+        <div class="modal fade" id="Vedant" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0">
+                    <div class="modal-header flex-column">
+                        <h3 class="modal-title" id="exampleModalLabel">Mr.Vedant T. Dhanwade</h3>
+
+                        <h6 class="text-muted">Frontend Developer</h6>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <h5 class="mb-4">D.I.E.T. Satara</h5>
+
+                        <div class="row mb-4">
+                            <div class="col-lg-6 col-12">
+                                <p>Designed and implemented responsive, user-friendly interfaces, ensuring an engaging and visually appealing user experience.</p>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <p>Skills:</p>
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>BootStrap</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="/static/jquery.min.js"></script>
+        <script src="/static/bootstrap.bundle.min.js"></script>
+        <script src="/static/Headroom.js"></script>
+        <script src="/static/jQuery.headroom.js"></script>
+        <script src="/static/slick.min.js"></script>
+        <script src="/static/custom.js"></script>
+
+    </body>
+{% endblock %}

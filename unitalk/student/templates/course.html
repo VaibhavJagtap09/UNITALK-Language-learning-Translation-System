@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block pagetitle %} Course {% endblock pagetitle %}
+{% block content %}
+{% include 'navbar.html' %}
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/album/">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #007bff;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .justified-text {
+      text-align: justify;
+    }
+
+    .image-container {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .feature-item h3 {
+      color: #007bff;
+    }
+
+    footer {
+            background: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-top: #ff6600 3px solid;
+            position: sticky;
+            width: 100%;
+            bottom: 0;
+    }
+
+    .content {
+      flex: 1;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+    
+  </style>
+
+<body>
+  <main>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="font-weight-light">Language Learning & Translation System</h1>
+        </div>
+      </div>
+    </section>
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
+                <title>Course1</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Indian Sign Language</text>
+              </svg>
+              <div class="card-body">
+                
+                  
+                    <div class="card-body">
+                      
+                      <p class="card-text">In this course you will learn the basics of Indian Sign Language.</p>
+                      <a href="{% url 'learning' %}" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
+                    
+              </div>
+            </div>
+          </div>
+          
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; INDIAN SIGN LANGUAGE LEARNING AND TRANSLATION SYSTEM USING LSTM ALGORITHM</p>
+    </div>
+  </footer>
+
+</body>
+
+{% endblock %}
